@@ -25,7 +25,7 @@ public class ManhattanProblem implements AStarProblem, Heuristic {
                     case ManhattanGraph.EMPTY:
                         ++nodeCount;
                         break;
-                    case ManhattanGraph.GOAL:
+                    case ManhattanGraph.START:
                         if (startNode != -1) {
                             throw new RuntimeException("There can be only one startNode node!");
                         }
@@ -57,7 +57,7 @@ public class ManhattanProblem implements AStarProblem, Heuristic {
             for (int x = 0; x < mg.width(); ++x) {
                 switch (mg.get(x, y)) {
                     case ManhattanGraph.EMPTY:
-                    case ManhattanGraph.GOAL:
+                    case ManhattanGraph.START:
                     case ManhattanGraph.TARGET:
                         nodes[nodeCount] = new Node(x, y);
                         nodeMap.put(nodes[nodeCount], nodeCount);

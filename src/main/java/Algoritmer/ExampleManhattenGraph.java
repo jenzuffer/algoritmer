@@ -8,7 +8,7 @@ public class ExampleManhattenGraph implements ManhattanGraph {
     public ExampleManhattenGraph()
     {
         map = new int[9][8];
-        map[1][1] = ManhattanGraph.GOAL;
+        map[1][1] = ManhattanGraph.START;
         map[7][6] = ManhattanGraph.TARGET;
         for(int y = 1; y < 7; ++y)
         {
