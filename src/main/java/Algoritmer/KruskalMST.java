@@ -1,6 +1,5 @@
 package Algoritmer;
 
-import Implementation.edges.EdgeImpl;
 import Implementation.queue.Queue;
 import Interfaces.Edge;
 import Interfaces.Graph;
@@ -21,7 +20,7 @@ public class KruskalMST {
     public KruskalMST(Graph G) {
 
         // create array of edges, sorted by weight
-        Edge[] edges = new Edge[G.E()];
+        Edge[] edges = new Edge[G.getEgdeCount()];
         int t = 0;
         for (Edge e : G.edges()) {
             edges[t++] = e;
@@ -29,17 +28,17 @@ public class KruskalMST {
         Arrays.sort(edges);
 
         // run greedy algorithm
-        UF uf = new UF(G.V());
-        for (int i = 0; i < G.E() && mst.size() < G.V() - 1; i++) {
+        UnionFinder unionFinder = new UnionFinder(G.getVertiesCount());
+        for (int i = 0; i < G.getEgdeCount() && mst.size() < G.getVertiesCount() - 1; i++) {
             Edge e = edges[i];
             int v = e.from();
             int w = e.to();
 
             // v-w does not create a cycle
-            if (uf.find(v) != uf.find(w)) {
-                uf.union(v, w);     // merge v and w components
+            if (unionFinder.find(v) != unionFinder.find(w)) {
+                unionFinder.union(v, w);     // merge v and w components
                 mst.enqueue(e);     // add edge e to mst
-                weight += e.weight();
+                weight += e.getWeight();
             }
         }
 
@@ -72,7 +71,7 @@ public class KruskalMST {
         // check total weight
         double total = 0.0;
         for (Edge e : edges()) {
-            total += e.weight();
+            total += e.getWeight();
         }
         if (Math.abs(total - weight()) > FLOATING_POINT_EPSILON) {
             System.err.printf("Weight of edges does not equal weight(): %f vs. %f\n", total, weight());
@@ -80,20 +79,20 @@ public class KruskalMST {
         }
 
         // check that it is acyclic
-        UF uf = new UF(G.V());
+        UnionFinder unionFinder = new UnionFinder(G.getVertiesCount());
         for (Edge e : edges()) {
             int v = e.from(), w = e.to();
-            if (uf.find(v) == uf.find(w)) {
+            if (unionFinder.find(v) == unionFinder.find(w)) {
                 System.err.println("Not a forest");
                 return false;
             }
-            uf.union(v, w);
+            unionFinder.union(v, w);
         }
 
         // check that it is a spanning forest
         for (Edge e : G.edges()) {
             int v = e.from(), w = e.to();
-            if (uf.find(v) != uf.find(w)) {
+            if (unionFinder.find(v) != unionFinder.find(w)) {
                 System.err.println("Not a spanning forest");
                 return false;
             }
@@ -103,17 +102,17 @@ public class KruskalMST {
         for (Edge e : edges()) {
 
             // all edges in MST except e
-            uf = new UF(G.V());
+            unionFinder = new UnionFinder(G.getVertiesCount());
             for (Edge f : mst) {
                 int x = f.from(), y = f.to();
-                if (f != e) uf.union(x, y);
+                if (f != e) unionFinder.union(x, y);
             }
 
             // check that e is min weight edge in crossing cut
             for (Edge f : G.edges()) {
                 int x = f.from(), y = f.to();
-                if (uf.find(x) != uf.find(y)) {
-                    if (f.weight() < e.weight()) {
+                if (unionFinder.find(x) != unionFinder.find(y)) {
+                    if (f.getWeight() < e.getWeight()) {
                         System.err.println("Edge " + f + " violates cut optimality conditions");
                         return false;
                     }

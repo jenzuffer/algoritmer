@@ -14,6 +14,6 @@ public class Test {
         int startNode = problem.getStartNode();
         Heuristic heuristic = problem.getHeuristic();
         Graph g = problem.getGraph();
-        System.out.println(g);
+        System.out.println(g.toString());
     }
 }

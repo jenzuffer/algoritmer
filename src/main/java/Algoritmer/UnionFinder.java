@@ -1,6 +1,6 @@
 package Algoritmer;
 
-public class UF {
+public class UnionFinder {
 
     private int[] parent;  // parent[i] = parent of i
     private byte[] rank;   // rank[i] = rank of subtree rooted at i (never more than 31)
@@ -14,7 +14,7 @@ public class UF {
      * @param n the number of elements
      * @throws IllegalArgumentException if {@code n < 0}
      */
-    public UF(int n) {
+    public UnionFinder(int n) {
         if (n < 0) throw new IllegalArgumentException();
         count = n;
         parent = new int[n];

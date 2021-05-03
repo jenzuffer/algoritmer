@@ -18,12 +18,12 @@ public class GraphImpl implements Graph, GraphBuilder {
     }
 
     @Override
-    public int V() {
+    public int getVertiesCount() {
         return array.length;
     }
 
     @Override
-    public int E() {
+    public int getEgdeCount() {
         return allEdges.size();
     }
 

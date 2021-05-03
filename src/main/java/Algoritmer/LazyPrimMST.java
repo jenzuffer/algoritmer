@@ -24,8 +24,8 @@ public class LazyPrimMST {
     public LazyPrimMST(Graph G) {
         mst = new Queue<Edge>();
         pq = new MinPQ<Edge>();
-        marked = new boolean[G.V()];
-        for (int v = 0; v < G.V(); v++)     // run Prim from all vertices to
+        marked = new boolean[G.getVertiesCount()];
+        for (int v = 0; v < G.getVertiesCount(); v++)     // run Prim from all vertices to
             if (!marked[v]) prim(G, v);     // get a minimum spanning forest
 
         // check optimality conditions
@@ -41,7 +41,7 @@ public class LazyPrimMST {
             assert marked[v] || marked[w];
             if (marked[v] && marked[w]) continue;      // lazy, both v and w already scanned
             mst.enqueue(e);                            // add e to MST
-            weight += e.weight();
+            weight += e.getWeight();
             if (!marked[v]) scan(G, v);               // v becomes part of tree
             if (!marked[w]) scan(G, w);               // w becomes part of tree
         }
@@ -80,7 +80,7 @@ public class LazyPrimMST {
         // check weight
         double totalWeight = 0.0;
         for (Edge e : edges()) {
-            totalWeight += e.weight();
+            totalWeight += e.getWeight();
         }
         if (Math.abs(totalWeight - weight()) > FLOATING_POINT_EPSILON) {
             System.err.printf("Weight of edges does not equal weight(): %f vs. %f\n", totalWeight, weight());
@@ -88,20 +88,20 @@ public class LazyPrimMST {
         }
 
         // check that it is acyclic
-        UF uf = new UF(G.V());
+        UnionFinder unionFinder = new UnionFinder(G.getVertiesCount());
         for (Edge e : edges()) {
             int v = e.from(), w = e.to();
-            if (uf.find(v) == uf.find(w)) {
+            if (unionFinder.find(v) == unionFinder.find(w)) {
                 System.err.println("Not a forest");
                 return false;
             }
-            uf.union(v, w);
+            unionFinder.union(v, w);
         }
 
         // check that it is a spanning forest
         for (Edge e : G.edges()) {
             int v = e.from(), w = e.to();
-            if (uf.find(v) != uf.find(w)) {
+            if (unionFinder.find(v) != unionFinder.find(w)) {
                 System.err.println("Not a spanning forest");
                 return false;
             }
@@ -111,17 +111,17 @@ public class LazyPrimMST {
         for (Edge e : edges()) {
 
             // all edges in MST except e
-            uf = new UF(G.V());
+            unionFinder = new UnionFinder(G.getVertiesCount());
             for (Edge f : mst) {
                 int x = f.from(), y = f.to();
-                if (f != e) uf.union(x, y);
+                if (f != e) unionFinder.union(x, y);
             }
 
             // check that e is min weight edge in crossing cut
             for (Edge f : G.edges()) {
                 int x = f.from(), y = f.to();
-                if (uf.find(x) != uf.find(y)) {
-                    if (f.weight() < e.weight()) {
+                if (unionFinder.find(x) != unionFinder.find(y)) {
+                    if (f.getWeight() < e.getWeight()) {
                         System.err.println("Edge " + f + " violates cut optimality conditions");
                         return false;
                     }

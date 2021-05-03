@@ -1,28 +1,20 @@
 package Implementation.edges;
 
-public class EdgeImpl implements Comparable<EdgeImpl> {
+import Interfaces.Edge;
 
-    private final int v;
-    private final int w;
-    private final double weight;
+public class EdgeImpl implements Edge {
 
-    /**
-     * Initializes an edge between vertices {@code v} and {@code w} of
-     * the given {@code weight}.
-     *
-     * @param v      one vertex
-     * @param w      the other vertex
-     * @param weight the weight of this edge
-     * @throws IllegalArgumentException if either {@code v} or {@code w}
-     *                                  is a negative integer
-     * @throws IllegalArgumentException if {@code weight} is {@code NaN}
-     */
-    public EdgeImpl(int v, int w, double weight) {
-        if (v < 0) throw new IllegalArgumentException("vertex index must be a non-negative integer");
-        if (w < 0) throw new IllegalArgumentException("vertex index must be a non-negative integer");
+    private final int vertexFrom;
+    private final int vertexTo;
+    private final float weight;
+
+
+    public EdgeImpl(int vertexFrom, int vertexTo, float weight) {
+        if (vertexFrom < 0) throw new IllegalArgumentException("vertex index must be a non-negative integer");
+        if (vertexTo < 0) throw new IllegalArgumentException("vertex index must be a non-negative integer");
         if (Double.isNaN(weight)) throw new IllegalArgumentException("Weight is NaN");
-        this.v = v;
-        this.w = w;
+        this.vertexFrom = vertexFrom;
+        this.vertexTo = vertexTo;
         this.weight = weight;
     }
 
@@ -31,7 +23,8 @@ public class EdgeImpl implements Comparable<EdgeImpl> {
      *
      * @return the weight of this edge
      */
-    public double weight() {
+    @Override
+    public float getWeight() {
         return weight;
     }
 
@@ -41,36 +34,14 @@ public class EdgeImpl implements Comparable<EdgeImpl> {
      * @return either endpoint of this edge
      */
     public int either() {
-        return v;
+        return vertexFrom;
     }
 
-    /**
-     * Returns the endpoint of this edge that is different from the given vertex.
-     *
-     * @param vertex one endpoint of this edge
-     * @return the other endpoint of this edge
-     * @throws IllegalArgumentException if the vertex is not one of the
-     *                                  endpoints of this edge
-     */
+
     public int other(int vertex) {
-        if (vertex == v) return w;
-        else if (vertex == w) return v;
+        if (vertex == vertexFrom) return vertexTo;
+        else if (vertex == vertexTo) return vertexFrom;
         else throw new IllegalArgumentException("Illegal endpoint");
-    }
-
-    /**
-     * Compares two edges by weight.
-     * Note that {@code compareTo()} is not consistent with {@code equals()},
-     * which uses the reference equality implementation inherited from {@code Object}.
-     *
-     * @param that the other edge
-     * @return a negative integer, zero, or positive integer depending on whether
-     * the weight of this is less than, equal to, or greater than the
-     * argument edge
-     */
-    @Override
-    public int compareTo(EdgeImpl that) {
-        return Double.compare(this.weight, that.weight);
     }
 
     /**
@@ -79,14 +50,18 @@ public class EdgeImpl implements Comparable<EdgeImpl> {
      * @return a string representation of this edge
      */
     public String toString() {
-        return String.format("%d-%d %.5f", v, w, weight);
+        return String.format("%d-%d %.5f", vertexFrom, vertexTo, weight);
     }
 
-    /*
-    public static void main(String[] args) {
-        Edge e = new Edge(12, 34, 5.67);
-        StdOut.println(e);
+    @Override
+    public int from() {
+        return vertexFrom;
     }
 
-     */
+    @Override
+    public int to() {
+        return vertexTo;
+    }
+
+
 }

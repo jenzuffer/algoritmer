@@ -12,11 +12,11 @@ public class Dijkstra {
     private PriorityQueue pq;
 
     public Dijkstra(Graph g, int startNode) {
-        pathArray = new int[g.V()];
+        pathArray = new int[g.getVertiesCount()];
         for (int i = 0; i < pathArray.length; i++) {
             pathArray[i] = -1;
         }
-        bestWeight = new double[g.V()];
+        bestWeight = new double[g.getVertiesCount()];
         for (int i = 0; i < bestWeight.length; i++) {
             bestWeight[i] = Double.MAX_VALUE;
         }
@@ -32,7 +32,7 @@ public class Dijkstra {
             pq.remove(curNode);
             double currentCost = bestWeight[curNode];
             for (Edge e : g.adj(curNode)) {
-                double cost = currentCost + e.weight();
+                double cost = currentCost + e.getWeight();
                 int toNode = e.to();
                 if (cost < bestWeight[toNode]) {
                     bestWeight[toNode] = cost;
