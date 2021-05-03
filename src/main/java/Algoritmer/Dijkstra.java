@@ -3,6 +3,7 @@ package Algoritmer;
 
 import Interfaces.Edge;
 import Interfaces.Graph;
+import Interfaces.Heuristic;
 
 import java.util.PriorityQueue;
 
