@@ -1,5 +1,6 @@
 package Implementation;
 
+import Implementation.edges.DirectedEdge;
 import Interfaces.Edge;
 import Interfaces.Graph;
 import Interfaces.GraphBuilder;
@@ -40,11 +41,13 @@ public class GraphImpl implements Graph, GraphBuilder {
 
     @Override
     public void addEdge(int v1, int v2, float weight) {
+        Edge edge = new DirectedEdge(v1, v2, weight);
 
+        allEdges.add(edge);
     }
 
     @Override
     public Graph build() {
-        return null;
+        return this;
     }
 }
