@@ -31,7 +31,7 @@ public class GraphImpl implements Graph, GraphBuilder {
     public Iterable<Edge> adj(int v) {
         ArrayList<Edge> adjlist = array[v];
         if (adjlist == null) return emptylist;
-        return adjlist;
+        return array[v];
     }
 
     @Override
@@ -42,10 +42,17 @@ public class GraphImpl implements Graph, GraphBuilder {
     @Override
     public void addEdge(int v1, int v2, float weight) {
         Edge edge = new DirectedEdge(v1, v2, weight);
-
         allEdges.add(edge);
+        helpaddtolist(v1 , edge);
     }
-
+    private void helpaddtolist(int v, Edge e){
+    ArrayList<Edge> list = array[v];
+    if (list==null){
+        list = new ArrayList<>();
+        array[v] = list;
+    }
+    list.add(e);
+    }
     @Override
     public Graph build() {
         return this;

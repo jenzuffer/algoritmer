@@ -15,7 +15,7 @@ public class Main {
         Graph build = newBuilder.build();
 
         Graph graph1 = new GraphFactoryImpl().readFromFile("notes.txt");
-        System.out.println(graph1);
+
 
 
 
@@ -24,6 +24,7 @@ public class Main {
        // LazyPrimMST lazyPrimMST = new LazyPrimMST(graph1);
         //KruskalMST kruskalMST = new KruskalMST(graph1);
         Dijkstra dijkstra = new Dijkstra(graph1, 0);
+        System.out.println(dijkstra);
        // ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
        // ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
        // UnionFinder unionFinder = new UnionFinder(10);
