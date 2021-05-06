@@ -37,4 +37,10 @@ public class DirectedEdge implements Edge {
         return vertexFrom + "->" + vertexTo + " " + String.format("%5.2f", weight);
     }
 
+    @Override
+    public int compareTo(Edge o) {
+        if (this.getWeight() < o.getWeight()) return -1;
+        else if (this.getWeight() > o.getWeight()) return +1;
+        else return 0;
+    }
 }

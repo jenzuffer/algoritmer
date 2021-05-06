@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 
 public class Dijkstra {
     int[] pathArray;
-    double[] bestWeight;
+    float[] bestWeight;
     private PriorityQueue pq;
 
     public Dijkstra(Graph g, int startNode) {
@@ -17,9 +17,9 @@ public class Dijkstra {
         for (int i = 0; i < pathArray.length; i++) {
             pathArray[i] = -1;
         }
-        bestWeight = new double[g.getVertiesCount()];
+        bestWeight = new float[g.getVertiesCount()];
         for (int i = 0; i < bestWeight.length; i++) {
-            bestWeight[i] = Double.MAX_VALUE;
+            bestWeight[i] = Float.MAX_VALUE;
         }
         int curNode = startNode;
         pathArray[startNode] = -1;
@@ -31,18 +31,21 @@ public class Dijkstra {
 
         while (!pq.isEmpty()) {
             pq.remove(curNode);
-            double currentCost = bestWeight[curNode];
+
+            float currentCost = bestWeight[curNode];
             for (Edge e : g.adj(curNode)) {
-                double cost = currentCost + e.getWeight();
+                float cost =  currentCost + e.getWeight();
                 int toNode = e.to();
                 if (cost < bestWeight[toNode]) {
                     bestWeight[toNode] = cost;
-                    pathArray[toNode] = curNode;
+                    pathArray[toNode]= curNode;
                 }
-                if (!pq.contains(toNode))
+                if(!pq.contains(toNode))
                     pq.add(toNode);
             }
+
             curNode = (int) pq.poll();
+
         }
     }
 

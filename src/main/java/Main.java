@@ -15,13 +15,19 @@ public class Main {
         Graph build = newBuilder.build();
 
         Graph graph1 = new GraphFactoryImpl().readFromFile("notes.txt");
-        LazyPrimMST lazyPrimMST = new LazyPrimMST(graph1);
-        KruskalMST kruskalMST = new KruskalMST(graph1);
-        Dijkstra dijkstra = new Dijkstra(graph1, 0);
-        ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
-        ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
-        UnionFinder unionFinder = new UnionFinder(10);
+        System.out.println(graph1);
 
+
+
+
+
+       // LazyPrimMST lazyPrimMST = new LazyPrimMST(graph1);
+        //KruskalMST kruskalMST = new KruskalMST(graph1);
+        Dijkstra dijkstra = new Dijkstra(graph1, 0);
+       // ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
+       // ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
+       // UnionFinder unionFinder = new UnionFinder(10);
+/*
         for (Edge edge1 : lazyPrimMST.edges()) {
             System.out.println(edge1);
         }
@@ -29,7 +35,7 @@ public class Main {
             System.out.println(edge);
         }
 
-
+*/
 
 /*
         EdgeWeightedDigraph factory = new EdgeWeightedDigraph(edgeWeightedGraph);
