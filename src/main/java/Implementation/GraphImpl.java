@@ -12,7 +12,7 @@ public class GraphImpl implements Graph, GraphBuilder {
     private ArrayList<Edge>[] array;
     private ArrayList<Edge> allEdges;
 
-    public GraphImpl(int verticeCount){
+    public GraphImpl(int verticeCount) {
         this.array = new ArrayList[verticeCount];
         allEdges = new ArrayList<>();
     }
@@ -29,9 +29,9 @@ public class GraphImpl implements Graph, GraphBuilder {
 
     @Override
     public Iterable<Edge> adj(int v) {
-         ArrayList<Edge> adjlist = array[v];
-         if (adjlist == null) return emptylist;
-         return adjlist;
+        ArrayList<Edge> adjlist = array[v];
+        if (adjlist == null) return emptylist;
+        return adjlist;
     }
 
     @Override
@@ -49,5 +49,22 @@ public class GraphImpl implements Graph, GraphBuilder {
     @Override
     public Graph build() {
         return this;
+    }
+
+    @Override
+    public String toString() {
+        var sb = new StringBuilder();
+        sb.append(getVertiesCount()).append('\n').append(' ').append(getEgdeCount()).append('\n');
+
+        for (var e : edges()) {
+            sb.append(e.from());
+            sb.append(' ');
+            sb.append(e.to());
+            sb.append(' ');
+            sb.append(e.getWeight());
+            sb.append('\n');
+        }
+
+        return sb.toString();
     }
 }

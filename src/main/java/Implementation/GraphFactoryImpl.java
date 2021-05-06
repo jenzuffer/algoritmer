@@ -29,6 +29,7 @@ public class GraphFactoryImpl implements GraphFactory
 			for(int i = 0; i < e; ++i)
 			{
 				line = br.readLine();
+				if (line == null) break;
 				String[] vs = line.split(" ");
 				int v1 = Integer.parseInt(vs[0]);
 				int v2 = Integer.parseInt(vs[1]);
