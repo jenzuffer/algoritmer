@@ -54,10 +54,9 @@ public class Dijkstra {
             }
 
             //dequeue skal altid retunere lavest score
-            //curNode = (int) pq.dequeue();
-            curNode = extractMinScore();
-            int dequeue = (int) pq.dequeue();
-            if (curNode != dequeue) curNode = dequeue;
+            //curNode = extractMinScore();
+             curNode = (int) pq.dequeue();
+            //if (curNode != dequeue) curNode = dequeue;
         }
     }
 
