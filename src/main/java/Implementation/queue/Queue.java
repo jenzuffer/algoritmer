@@ -130,18 +130,3 @@ public class Queue<Item> implements Iterable<Item> {
 
     }
 }
-
-
-/**
- * public static void main(String[] args) {
- * Queue<String> queue = new Queue<String>();
- * while (!StdIn.isEmpty()) {
- * String item = StdIn.readString();
- * if (!item.equals("-"))
- * queue.enqueue(item);
- * else if (!queue.isEmpty())
- * StdOut.print(queue.dequeue() + " ");
- * }
- * StdOut.println("(" + queue.size() + " left on queue)");
- * }
- */

@@ -20,19 +20,18 @@ public class Main {
         System.out.println(ls.edges() + " " + ls.weight());
 
         var ls2 = new KruskalMST(graph1);
-        System.out.println(ls2.edges()+ " " + ls2.weight());
+        System.out.println(ls2.edges() + " " + ls2.weight());
 
 
-
-       // LazyPrimMST lazyPrimMST = new LazyPrimMST(graph1);
+        // LazyPrimMST lazyPrimMST = new LazyPrimMST(graph1);
         //KruskalMST kruskalMST = new KruskalMST(graph1);
-      /* Dijkstra dijkstra = new Dijkstra(graph1, 0);
+        Dijkstra dijkstra = new Dijkstra(graph1, 0);
         System.out.println(dijkstra);
-*/
 
-       // ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
-       // ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
-       // UnionFinder unionFinder = new UnionFinder(10);
+
+        // ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
+        // ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
+        // UnionFinder unionFinder = new UnionFinder(10);
 /*
         for (Edge edge1 : lazyPrimMST.edges()) {
             System.out.println(edge1);
