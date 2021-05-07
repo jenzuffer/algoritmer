@@ -12,20 +12,23 @@ public class Main {
 
 
         Graph graph1 = new GraphFactoryImpl().readFromFile("src/main/resources/graph2.txt");
+        Graph graph2 = new GraphFactoryImpl().readFromFile("src/main/resources/graph2.txt");
 
         //System.out.println(graph1);
 
-        //LazyPrimMST ls = new LazyPrimMST(graph1);
+        var ls = new LazyPrimMST(graph1);
+        System.out.println(ls.edges() + " " + ls.weight());
 
-
+        var ls2 = new KruskalMST(graph1);
+        System.out.println(ls2.edges()+ " " + ls2.weight());
 
 
 
        // LazyPrimMST lazyPrimMST = new LazyPrimMST(graph1);
         //KruskalMST kruskalMST = new KruskalMST(graph1);
-       Dijkstra dijkstra = new Dijkstra(graph1, 0);
+      /* Dijkstra dijkstra = new Dijkstra(graph1, 0);
         System.out.println(dijkstra);
-
+*/
 
        // ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
        // ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
