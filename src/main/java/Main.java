@@ -10,12 +10,12 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        EdgeImpl edgeimpl = new EdgeImpl(0, 5, 14);
-        GraphBuilder newBuilder = new GraphFactoryImpl().getNewBuilder(8);
-        Graph build = newBuilder.build();
 
-        Graph graph1 = new GraphFactoryImpl().readFromFile("notes.txt");
+        Graph graph1 = new GraphFactoryImpl().readFromFile("src/main/resources/graph2.txt");
 
+        //System.out.println(graph1);
+
+        //LazyPrimMST ls = new LazyPrimMST(graph1);
 
 
 
@@ -23,8 +23,10 @@ public class Main {
 
        // LazyPrimMST lazyPrimMST = new LazyPrimMST(graph1);
         //KruskalMST kruskalMST = new KruskalMST(graph1);
-        Dijkstra dijkstra = new Dijkstra(graph1, 0);
+       Dijkstra dijkstra = new Dijkstra(graph1, 0);
         System.out.println(dijkstra);
+
+
        // ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
        // ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
        // UnionFinder unionFinder = new UnionFinder(10);

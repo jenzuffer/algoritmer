@@ -9,9 +9,9 @@ import Interfaces.Graph;
 //https://algs4.cs.princeton.edu/43mst/
 public class LazyPrimMST {
 
-    private static final double FLOATING_POINT_EPSILON = 1E-12;
+    private static final Float FLOATING_POINT_EPSILON = 1E-12f;
 
-    private double weight;       // total weight of MST
+    private float weight;       // total weight of MST
     private Queue<Edge> mst;     // edges in the MST
     private boolean[] marked;    // marked[v] = true iff v on tree
     private MinPQ<Edge> pq;      // edges with one endpoint in tree
@@ -55,30 +55,20 @@ public class LazyPrimMST {
             if (!marked[e.to()]) pq.insert(e);
     }
 
-    /**
-     * Returns the edges in a minimum spanning tree (or forest).
-     *
-     * @return the edges in a minimum spanning tree (or forest) as
-     * an iterable of edges
-     */
+
     public Iterable<Edge> edges() {
         return mst;
     }
 
-    /**
-     * Returns the sum of the edge weights in a minimum spanning tree (or forest).
-     *
-     * @return the sum of the edge weights in a minimum spanning tree (or forest)
-     */
-    public double weight() {
+
+    public float weight() {
         return weight;
     }
 
-    // check optimality conditions (takes time proportional to E V lg* V)
+
     private boolean check(Graph G) {
 
-        // check weight
-        double totalWeight = 0.0;
+        float totalWeight = 0.0f;
         for (Edge e : edges()) {
             totalWeight += e.getWeight();
         }
@@ -133,19 +123,4 @@ public class LazyPrimMST {
         return true;
     }
 
-
-    /**
-     * Unit tests the {@code LazyPrimMST} data type.
-     *
-     * @param args the command-line arguments
-
-    public static void main(String[] args) {
-        In in = new In(args[0]);
-        EdgeWeightedGraph G = new EdgeWeightedGraph(in);
-        LazyPrimMST mst = new LazyPrimMST(G);
-        for (Edge e : mst.edges()) {
-            StdOut.println(e);
-        }
-        StdOut.printf("%.5f\n", mst.weight());
-    }*/
 }
