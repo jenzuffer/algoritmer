@@ -12,12 +12,15 @@ public class Main {
 
 
         Graph graph1 = new GraphFactoryImpl().readFromFile("src/main/resources/graph2.txt");
-        Graph graph2 = new GraphFactoryImpl().readFromFile("src/main/resources/graph2.txt");
+
 
         //System.out.println(graph1);
 
         var ls = new LazyPrimMST(graph1);
         System.out.println(ls.edges() + " " + ls.weight());
+
+        var ls3 = new PrimMST(graph1);
+        System.out.println(ls3.edges() + " " + ls3.weight());
 
         var ls2 = new KruskalMST(graph1);
         System.out.println(ls2.edges()+ " " + ls2.weight());

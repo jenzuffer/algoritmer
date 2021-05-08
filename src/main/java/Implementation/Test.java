@@ -10,10 +10,14 @@ public class Test {
     public static void main(String[] args)
     {
         ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
+
+        /*
         AStarProblem problem = new ManhattanProblem(exampleManhattenGraph);
         int startNode = problem.getStartNode();
         Heuristic heuristic = problem.getHeuristic();
         Graph g = problem.getGraph();
         System.out.println(g.toString());
+    */
     }
+
 }

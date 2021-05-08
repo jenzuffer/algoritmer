@@ -2,6 +2,8 @@ package Algoritmer;
 
 import Interfaces.ManhattanGraph;
 
+import java.util.Arrays;
+
 public class ExampleManhattenGraph implements ManhattanGraph {
     private int[][] map;
 
@@ -14,6 +16,14 @@ public class ExampleManhattenGraph implements ManhattanGraph {
         {
             map[4][y] = ManhattanGraph.WALL;
         }
+
+        for (int i = 0 ; i < height() ; i++){
+            for (int j = 0; j < height(); j++) {
+                System.out.print(get(j,i)+ " ");
+            }
+            System.out.println();
+        }
+
     }
 
     @Override

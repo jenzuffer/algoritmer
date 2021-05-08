@@ -8,8 +8,8 @@ import java.util.Arrays;
 
 public class KruskalMST {
 
-    private static final double FLOATING_POINT_EPSILON = 1E-12;
-    private double weight;                        // weight of MST
+    private static final float FLOATING_POINT_EPSILON = 1E-12f;
+    private float weight;                        // weight of MST
     private Queue<Edge> mst = new Queue<Edge>();  // edges in MST
 
     /**
