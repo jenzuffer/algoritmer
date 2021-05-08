@@ -8,9 +8,9 @@ import Interfaces.Graph;
 import java.util.*;
 
 public class Dijkstra {
-    int[] pathArray;
-    float[] bestWeight;
-    boolean[] marked;
+    private int[] pathArray;
+    private float[] bestWeight;
+    private boolean[] marked;
     private Queue pq;
 
     public Dijkstra(Graph g, int startNode) {
@@ -47,6 +47,7 @@ public class Dijkstra {
                     bestWeight[toNode] = cost;
                     pathArray[toNode] = curNode;
                 }
+
                 if (!marked[toNode]) {
                     pq.enqueue(toNode);
                     marked[toNode] = true;
