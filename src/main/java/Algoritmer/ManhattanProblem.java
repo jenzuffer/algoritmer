@@ -64,7 +64,6 @@ public class ManhattanProblem implements AStarProblem, Heuristic {
                         ++nodeCount;
                         break;
                 }
-
             }
         }
 

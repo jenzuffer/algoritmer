@@ -1,6 +1,7 @@
 import Algoritmer.*;
 import Implementation.GraphFactoryImpl;
 import Implementation.edges.EdgeImpl;
+import Interfaces.AStarProblem;
 import Interfaces.Edge;
 import Interfaces.Graph;
 import Interfaces.GraphBuilder;
@@ -14,11 +15,6 @@ public class Main {
         Graph graph1 = new GraphFactoryImpl().readFromFile("src/main/resources/graph2.txt");
 
 
-        //System.out.println(graph1);
-
-        var ls = new LazyPrimMST(graph1);
-        System.out.println(ls.edges() + " " + ls.weight());
-
         var ls3 = new PrimMST(graph1);
         System.out.println(ls3.edges() + " " + ls3.weight());
 
@@ -28,12 +24,16 @@ public class Main {
 
         // LazyPrimMST lazyPrimMST = new LazyPrimMST(graph1);
         //KruskalMST kruskalMST = new KruskalMST(graph1);
-        Dijkstra dijkstra = new Dijkstra(graph1, 0);
-        System.out.println(dijkstra);
+        //Dijkstra dijkstra = new Dijkstra(graph1, 0);
+        //System.out.println(dijkstra);
 
 
-        // ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
-        // ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
+        System.out.println("Manhatten Astar \n");
+        ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
+        ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
+        AStarAlgorithm aStarAlgorithm = new AStarAlgorithm(manhattanProblem);
+        System.out.println(aStarAlgorithm);
+
         // UnionFinder unionFinder = new UnionFinder(10);
 /*
         for (Edge edge1 : lazyPrimMST.edges()) {
