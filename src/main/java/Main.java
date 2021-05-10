@@ -34,6 +34,8 @@ public class Main {
         AStarAlgorithm aStarAlgorithm = new AStarAlgorithm(manhattanProblem);
         System.out.println(aStarAlgorithm);
 
+
+
         // UnionFinder unionFinder = new UnionFinder(10);
 /*
         for (Edge edge1 : lazyPrimMST.edges()) {
