@@ -127,6 +127,5 @@ public class Queue<Item> implements Iterable<Item> {
             current = current.next;
             return item;
         }
-
     }
 }
