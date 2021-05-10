@@ -15,7 +15,6 @@ public class Test {
 
         var maze = new MazeMapFromFile("src/main/resources/astarfile.txt");
 
-
         AStarProblem problem = new ManhattanProblem(exampleManhattenGraph);
         AStarAlgorithm aStarAlgorithm = new AStarAlgorithm(problem);
         System.out.println(aStarAlgorithm);
