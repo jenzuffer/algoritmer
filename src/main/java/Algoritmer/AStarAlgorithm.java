@@ -24,9 +24,11 @@ public class AStarAlgorithm {
         this.targetNode = props.getTargetNode();
         this.heuristic = props.getHeuristic();
         pathArray = new int[graph.getVertiesCount()];
+
         for (int i = 0; i < pathArray.length; i++) {
             pathArray[i] = -1;
         }
+
         bestWeight = new float[graph.getVertiesCount()];
         for (int i = 0; i < bestWeight.length; i++) {
             bestWeight[i] = Float.MAX_VALUE;
@@ -41,13 +43,19 @@ public class AStarAlgorithm {
         bestWeight[curNode] = 0;
         pq = new Queue();
         pq.enqueue(startNode);
+
+        float bestWeigth =  this.heuristic.h(this.startNode, this.targetNode);
+
         while (!pq.isEmpty()) {
-            float currentCost = bestWeight[curNode] + this.heuristic.h(curNode, this.targetNode); // accumulating heurestics
-            for (Edge e : graph.adj(curNode)) {
-                float cost = currentCost + e.getWeight();
+            var h = this.heuristic.h(curNode, this.targetNode);
+            while(!pq.isEmpty()) pq.dequeue();
+
+ //           System.out.println(curNode + " : currentnode" );
+            for (Edge e : graph.adj(curNode )) {
+                float cost = bestWeight[curNode] + e.getWeight();
                 int toNode = e.to();
-                if (cost < bestWeight[toNode]) {
-                    //System.out.println("cost: " + cost + " toNode: " + toNode);
+                if (cost < bestWeight[toNode]  ) {
+                    System.out.println("cost: " + cost + " toNode: " + toNode);
                     bestWeight[toNode] = cost;
                     pathArray[toNode] = curNode;
                 }
@@ -73,7 +81,7 @@ public class AStarAlgorithm {
         res.append("path parents:\n");
         for (int i = 0; i < pathArray.length; i++) {
             res.append(i);
-            res.append(": ");
+            res.append(" current node: ");
             res.append(pathArray[i]);
             res.append("\n");
         }
