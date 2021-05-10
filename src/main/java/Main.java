@@ -27,6 +27,8 @@ public class Main {
         //System.out.println(dijkstra);
 
 
+        BFS bfs = new BFS(graph1, 0);
+
         System.out.println("Manhatten Astar \n");
         ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
         ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
