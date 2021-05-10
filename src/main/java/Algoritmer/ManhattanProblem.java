@@ -124,8 +124,10 @@ public class ManhattanProblem implements AStarProblem, Heuristic {
     public float h(int a, int b) {
         Node nodeA = nodes[a];
         Node nodeB = nodes[b];
-        return Math.abs(nodeA.x - nodeA.x) + Math.abs(nodeA.y - nodeB.y);
+        return Math.abs(nodeA.x - nodeB.x) + Math.abs(nodeA.y - nodeB.y);
     }
+
+
 
     public String asString(int node) {
         Node n = nodes[node];
