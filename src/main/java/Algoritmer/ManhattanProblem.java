@@ -128,7 +128,6 @@ public class ManhattanProblem implements AStarProblem, Heuristic {
     }
 
 
-
     public String asString(int node) {
         Node n = nodes[node];
         return "(" + n.x + ", " + n.y + ")";

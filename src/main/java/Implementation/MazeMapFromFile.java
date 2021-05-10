@@ -23,7 +23,7 @@ public class MazeMapFromFile implements ManhattanGraph {
 
             for (int i = 0; i < read.size(); i++) {
 
-                for (int j = 0; j <read.get(i).length(); j++) {
+                    for (int j = 0; j <read.get(i).length(); j++) {
 
                     switch (read.get(i).charAt(j)){
                         case '*':
@@ -45,7 +45,7 @@ public class MazeMapFromFile implements ManhattanGraph {
 
             }
         }
-
+            read = null;
         }
 
 

@@ -13,11 +13,13 @@ public class Test {
     public static void main(String[] args) throws IOException {
         ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
 
-        var maze = new MazeMapFromFile("src/main/resources/astarfile.txt");
+        //var maze = new MazeMapFromFile("src/main/resources/astarfile.txt");
+
 
         AStarProblem problem = new ManhattanProblem(exampleManhattenGraph);
-        AStarAlgorithm aStarAlgorithm = new AStarAlgorithm(problem);
-        System.out.println(aStarAlgorithm);
+        var ser  =new AStarAlgorithm(problem);
+        System.out.println(ser);
+
 
     }
 
