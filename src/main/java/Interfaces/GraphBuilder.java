@@ -1,5 +1,6 @@
 package Interfaces;
 
+import Implementation.Airport;
 import Interfaces.Graph;
 
 public interface GraphBuilder {

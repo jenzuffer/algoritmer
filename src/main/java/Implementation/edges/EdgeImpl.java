@@ -28,6 +28,7 @@ public class EdgeImpl implements Edge {
         return weight;
     }
 
+
     /**
      * Returns either endpoint of this edge.
      *

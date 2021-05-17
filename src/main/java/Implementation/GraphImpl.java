@@ -1,6 +1,7 @@
 package Implementation;
 
 import Implementation.edges.DirectedEdge;
+import Implementation.edges.FlyRouteEdge;
 import Interfaces.Edge;
 import Interfaces.Graph;
 import Interfaces.GraphBuilder;

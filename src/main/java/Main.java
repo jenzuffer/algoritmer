@@ -1,12 +1,16 @@
 import Algoritmer.*;
-import Implementation.GraphFactoryImpl;
+import Implementation.*;
 import Implementation.edges.EdgeImpl;
+import Implementation.utilities.FileReaderImpl;
 import Interfaces.AStarProblem;
 import Interfaces.Edge;
 import Interfaces.Graph;
 import Interfaces.GraphBuilder;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -27,9 +31,45 @@ public class Main {
         //System.out.println(dijkstra);
 
 
-        //BFS bfs = new BFS(graph1, 0);
-        DFS dfs = new DFS(graph1, 0);
 
+        FileReaderImpl fileReader = new FileReaderImpl();
+        String path = "src\\main\\resources\\aircrafts.csv";
+        List<Aircraft> aircraftList = fileReader.getAircrafts(path);
+        path = "src\\main\\resources\\airlines.csv";
+        List<Airline> airlines = fileReader.getAirlines(path);
+        path = "src\\main\\resources\\airports.csv";
+        List<Airport> airports = fileReader.getAirports(path);
+        path = "src\\main\\resources\\routes.csv";
+        List<Route> routes = fileReader.getRoutes(path);
+
+        String departAirport = "HFN";
+        String destinationAirport = "HGU";
+        String airline = "W9";
+
+
+        BFS bfs = new BFS(graph1, 0);
+        DFS dfs = new DFS(graph1, 0);
+        new GraphFactoryImpl().readFromObjects(aircraftList, airlines, airports, routes)
+
+
+        /*
+        System.out.println("aircrafts");
+        for (Aircraft aircraft : aircraftList) {
+            System.out.println(aircraft);
+        }
+        System.out.println("airlines");
+        for (Airline airline : airlines) {
+            System.out.println(airline);
+        }
+        System.out.println("airports");
+        for (Airport airport : airports) {
+            System.out.println(airport);
+        }
+        System.out.println("routes");
+        for (Route route : routes) {
+            System.out.println(route);
+        }
+        */
         /*
         System.out.println("Manhatten Astar \n");
         ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
