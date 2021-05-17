@@ -9,33 +9,33 @@ public class FlyRouteEdge implements EdgeFly {
     private Airport source;
     private Airport destination;
     private double distance;
-    private String aircraftcode;
+    private String airlines_codes;
 
-    public FlyRouteEdge(Airport source, Airport destination, double distance, String aircraftcode) {
+    public FlyRouteEdge(Airport source, Airport destination, double distance, String airlines_codes) {
         this.source = source;
         this.destination = destination;
         this.distance = distance;
-        this.aircraftcode = aircraftcode;
+        this.airlines_codes = airlines_codes;
     }
 
     @Override
-    public String aircraftCode() {
-        return this.aircraftcode;
+    public String airlineCode() {
+        return this.airlines_codes;
     }
 
     @Override
     public double getDistance() {
-        return 0;
+        return distance;
     }
 
     @Override
     public Airport getDepartedAirport() {
-        return null;
+        return source;
     }
 
     @Override
     public Airport getDestinationAirport() {
-        return null;
+        return destination;
     }
 
     @Override

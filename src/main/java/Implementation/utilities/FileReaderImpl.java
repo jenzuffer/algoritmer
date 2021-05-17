@@ -74,7 +74,7 @@ public class FileReaderImpl {
             String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(";");
-                routes.add(new Route(values[0], values[1], values[2], values[3], values[4]));
+                routes.add(new Route(values[0], values[1], values[2], Double.valueOf(values[3]), values[4]));
             }
         } catch (IOException e) {
             e.printStackTrace();

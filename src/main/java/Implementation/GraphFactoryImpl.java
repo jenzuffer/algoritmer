@@ -39,27 +39,5 @@ public class GraphFactoryImpl implements GraphFactory {
         }
     }
 
-    //airports = nodes
-    //routes = edges
-
-    @Override
-    public Graph readFromObjects(List<Aircraft> aircrafts, List<Airline> airlines, List<Airport> airports, List<Route> routes) {
-        GraphBuilder builder = getNewBuilder(airports.size());
-        HashMap<String, Airport> airportHashMap = new HashMap<>();
-        for (Airport airport : airports){
-            airportHashMap.put(airport.getCode(), airport);
-        }
-        for (Route route : routes) {
-            String source_code = route.getSource_code();
-            String destination_code = route.getDestination_code();
-            Airport airport_source = airportHashMap.get(source_code);
-            Airport airport_destination = airportHashMap.get(destination_code);
-            double distance = route.getDistance();
-            String airline_code = route.getAirline_code();
-
-
-        }
-
-    }
 
 }

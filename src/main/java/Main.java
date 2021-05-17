@@ -49,7 +49,7 @@ public class Main {
 
         BFS bfs = new BFS(graph1, 0);
         DFS dfs = new DFS(graph1, 0);
-        new GraphFactoryImpl().readFromObjects(aircraftList, airlines, airports, routes)
+        new GraphFactory().readFromObjects(aircraftList, airlines, airports, routes);
 
 
         /*
