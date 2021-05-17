@@ -1,8 +1,8 @@
 package Implementation.utilities;
 
-import Implementation.Aircraft;
-import Implementation.Airline;
-import Implementation.Airport;
+import Implementation.dto.Aircraft;
+import Implementation.dto.Airline;
+import Implementation.dto.Airport;
 import Implementation.Route;
 
 import java.io.BufferedReader;

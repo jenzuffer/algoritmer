@@ -1,4 +1,4 @@
-package Implementation;
+package Implementation.dto;
 
 public class Aircraft {
     private String code;

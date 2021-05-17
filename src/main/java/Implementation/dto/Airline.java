@@ -1,4 +1,4 @@
-package Implementation;
+package Implementation.dto;
 
 public class Airline {
     private String code;

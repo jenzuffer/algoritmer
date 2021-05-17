@@ -1,8 +1,7 @@
 package Implementation;
 
-import Implementation.edges.DirectedEdge;
+import Implementation.dto.Airport;
 import Implementation.edges.FlyRouteEdge;
-import Interfaces.Edge;
 import Interfaces.EdgeFly;
 import Interfaces.GraphBuilderRoute;
 import Interfaces.GraphRoute;
@@ -13,7 +12,7 @@ import java.util.HashMap;
 public class GraphImplFly implements GraphRoute, GraphBuilderRoute {
 
     private static final ArrayList<EdgeFly> emptylist = new ArrayList<>(0);
-    private HashMap<String, EdgeFly> array;
+    private HashMap<String, ArrayList<EdgeFly>> array;
     private ArrayList<EdgeFly> allEdges;
 
     public GraphImplFly(int verticeCount) {
@@ -34,17 +33,17 @@ public class GraphImplFly implements GraphRoute, GraphBuilderRoute {
     }
 
     private void helpaddtolist(String code, EdgeFly e) {
-        EdgeFly edgeFly = array.get(code);
-        if (edgeFly == null) {
-            edgeFly = new FlyRouteEdge(e.getDepartedAirport(), e.getDestinationAirport(), );
-            array[v] = list;
+        ArrayList<EdgeFly> edgeFlies = array.get(code);
+        if (edgeFlies == null) {
+            edgeFlies = new ArrayList<>();
+            edgeFlies.add(e);
+            array.put(code, edgeFlies);
         }
-        list.add(e);
     }
 
     @Override
     public int getVertiesCount() {
-        return array.length;
+        return array.size();
     }
 
     @Override
@@ -53,10 +52,10 @@ public class GraphImplFly implements GraphRoute, GraphBuilderRoute {
     }
 
     @Override
-    public Iterable<EdgeFly> adj(int v) {
-        ArrayList<EdgeFly> adjlist = array[v];
+    public Iterable<EdgeFly> adj(String code) {
+        ArrayList<EdgeFly> adjlist = array.get(code);
         if (adjlist == null) return emptylist;
-        return array[v];
+        return adjlist;
     }
 
     @Override

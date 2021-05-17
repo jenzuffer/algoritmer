@@ -1,14 +1,11 @@
 import Algoritmer.*;
 import Implementation.*;
-import Implementation.edges.EdgeImpl;
+import Implementation.dto.Aircraft;
+import Implementation.dto.Airline;
+import Implementation.dto.Airport;
 import Implementation.utilities.FileReaderImpl;
-import Interfaces.AStarProblem;
-import Interfaces.Edge;
-import Interfaces.Graph;
-import Interfaces.GraphBuilder;
+import Interfaces.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -49,7 +46,7 @@ public class Main {
 
         BFS bfs = new BFS(graph1, 0);
         DFS dfs = new DFS(graph1, 0);
-        new GraphFactory().readFromObjects(aircraftList, airlines, airports, routes);
+        new GraphFactoryImplFly().readFromObjects(aircraftList, airlines, airports, routes)
 
 
         /*

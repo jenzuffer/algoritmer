@@ -1,6 +1,6 @@
 package Interfaces;
 
-import Implementation.Airport;
+import Implementation.dto.Airport;
 
 public interface EdgeFly extends Comparable<EdgeFly>{
     String airlineCode();

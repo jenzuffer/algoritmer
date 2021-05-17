@@ -1,8 +1,6 @@
 package Implementation.edges;
 
-import Implementation.Airport;
-import Implementation.Route;
-import Interfaces.Edge;
+import Implementation.dto.Airport;
 import Interfaces.EdgeFly;
 
 public class FlyRouteEdge implements EdgeFly {
@@ -16,6 +14,13 @@ public class FlyRouteEdge implements EdgeFly {
         this.destination = destination;
         this.distance = distance;
         this.airlines_codes = airlines_codes;
+    }
+
+    public FlyRouteEdge(EdgeFly edgeFly) {
+        this.source = edgeFly.getDepartedAirport();
+        this.destination = edgeFly.getDestinationAirport();
+        this.distance = edgeFly.getDistance();
+        this.airlines_codes = edgeFly.airlineCode();
     }
 
     @Override

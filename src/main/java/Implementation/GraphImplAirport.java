@@ -1,5 +1,8 @@
 package Implementation;
 
+import Implementation.dto.Aircraft;
+import Implementation.dto.Airline;
+import Implementation.dto.Airport;
 import Implementation.edges.FlyRouteEdge;
 import Interfaces.*;
 
@@ -17,9 +20,40 @@ public class GraphImplAirport implements GraphRoute, GraphBuilderRoute {
         allEdges = new ArrayList<>();
     }
 
+    @Override
+    public GraphRoute build() {
+        return null;
+    }
+
+    @Override
+    public void addEdge(Airport departure, Airport destination, double distance, String airlines_codes) {
+
+    }
+
+    @Override
+    public int getVertiesCount() {
+        return 0;
+    }
+
+    @Override
+    public int getEgdeCount() {
+        return 0;
+    }
+
+    @Override
+    public Iterable<EdgeFly> adj(String code) {
+        return null;
+    }
+
+    @Override
+    public Iterable<EdgeFly> edges() {
+        return null;
+    }
+
     //airports = nodes
     //routes = edges
 
+    /*
     @Override
     public GraphImplAirport readFromObjects(List<Aircraft> aircrafts, List<Airline> airlines, List<Airport> airports, List<Route> routes) {
         GraphBuilder builder = getNewBuilder(airports.size());
@@ -51,8 +85,8 @@ public class GraphImplAirport implements GraphRoute, GraphBuilderRoute {
     }
 
     @Override
-    public Iterable<EdgeFly> adj(int v) {
-        ArrayList<EdgeFly> adjlist = array[v];
+    public Iterable<EdgeFly> adj(String code) {
+        ArrayList<EdgeFly> adjlist = array.;
         if (adjlist == null) return emptylist;
         return array[v];
     }
@@ -82,4 +116,6 @@ public class GraphImplAirport implements GraphRoute, GraphBuilderRoute {
         }
         list.add(e);
     }
+
+     */
 }
