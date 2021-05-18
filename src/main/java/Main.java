@@ -12,6 +12,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws IOException {
 
+        /*
         Graph graph1 = new GraphFactoryImpl().readFromFile("src/main/resources/graph2.txt");
 
 
@@ -20,7 +21,7 @@ public class Main {
 
         var ls2 = new KruskalMST(graph1);
         System.out.println(ls2.edges() + " " + ls2.weight());
-
+        */
 
         // LazyPrimMST lazyPrimMST = new LazyPrimMST(graph1);
         //KruskalMST kruskalMST = new KruskalMST(graph1);
@@ -39,53 +40,17 @@ public class Main {
         path = "src\\main\\resources\\routes.csv";
         List<Route> routes = fileReader.getRoutes(path);
 
-        String departAirport = "HFN";
-        String destinationAirport = "HGU";
+        String departAirport = "HEH";
+        String destinationAirport = "MYT";
         String airline = "W9";
 
-
-        BFS bfs = new BFS(graph1, 0);
-        DFS dfs = new DFS(graph1, 0);
-        new GraphFactoryImplFly().readFromObjects(aircraftList, airlines, airports, routes)
-
-
-        /*
-        System.out.println("aircrafts");
-        for (Aircraft aircraft : aircraftList) {
-            System.out.println(aircraft);
-        }
-        System.out.println("airlines");
-        for (Airline airline : airlines) {
-            System.out.println(airline);
-        }
-        System.out.println("airports");
-        for (Airport airport : airports) {
-            System.out.println(airport);
-        }
-        System.out.println("routes");
-        for (Route route : routes) {
-            System.out.println(route);
-        }
-        */
-        /*
-        System.out.println("Manhatten Astar \n");
-        ExampleManhattenGraph exampleManhattenGraph = new ExampleManhattenGraph();
-        ManhattanProblem manhattanProblem = new ManhattanProblem(exampleManhattenGraph);
-        AStarAlgorithm aStarAlgorithm = new AStarAlgorithm(manhattanProblem);
-        System.out.println(aStarAlgorithm);
-        */
-
-
-        // UnionFinder unionFinder = new UnionFinder(10);
-/*
-        for (Edge edge1 : lazyPrimMST.edges()) {
-            System.out.println(edge1);
-        }
-        for (Edge edge : kruskalMST.edges()) {
-            System.out.println(edge);
-        }
-
-*/
+        GraphRoute graphRoute = new GraphFactoryImplFly().readFromObjects(aircraftList, airlines, airports, routes, airline);
+        BFS bfs = new BFS(graphRoute, departAirport, destinationAirport);
+        System.out.println("next");
+        destinationAirport = "PBU";
+        departAirport = "AKY";
+        bfs = new BFS(graphRoute, departAirport, destinationAirport);
+        //DFS dfs = new DFS(graph1, 0);
 
 /*
         EdgeWeightedDigraph factory = new EdgeWeightedDigraph(edgeWeightedGraph);

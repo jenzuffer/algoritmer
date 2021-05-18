@@ -1,31 +1,41 @@
 package Algoritmer;
 
+import Implementation.dto.Airport;
 import Implementation.queue.Queue;
 import Interfaces.Edge;
+import Interfaces.EdgeFly;
 import Interfaces.Graph;
+import Interfaces.GraphRoute;
+
+import java.util.HashMap;
 
 public class BFS {
 
-    private boolean[] marked;
+    private HashMap<String, Boolean> marked;
     private Queue pq;
 
-    //Time Complexity: O(V+E) where V is number of vertices in the graph and E is number of edges
-    public BFS(Graph graph, int startNode){
-        this.marked = new boolean[graph.getVertiesCount()];
-        marked[startNode] = true;
+    public BFS(GraphRoute graphRoute, String departure_code, String destination_code) {
+        this.marked = new HashMap<>(graphRoute.getVertiesCount());
+        marked.put(departure_code, true);
         pq = new Queue();
-        pq.enqueue(startNode);
+        pq.enqueue(departure_code);
 
-        while (!pq.isEmpty()){
-            int dequeue = (int) pq.dequeue();
-            System.out.println("Dequeue: " + dequeue);
-            for (Edge edge : graph.adj(dequeue)) {
-                float weight = edge.getWeight();
-                int to = edge.to();
-                if (!marked[to]){
-                    marked[to] = true;
-                    pq.enqueue(to);
-                    System.out.println("weight: " + weight + " to: " + to);
+        while (!pq.isEmpty()) {
+            String dequeue = (String) pq.dequeue();
+            System.out.println("\n\nDequeue: " + dequeue);
+            for (EdgeFly edgeFly : graphRoute.adj(dequeue)) {
+                double distance = edgeFly.getDistance();
+                String airline_code = edgeFly.airlineCode();
+                Airport destinationAirport = edgeFly.getDestinationAirport();
+                String code = destinationAirport.getCode();
+                System.out.println("code: " + code);
+                //System.out.println("marked.get(code): " + marked.get(code));
+                if (marked.get(code) == null || !marked.get(code)) {
+                    marked.put(code, true);
+                    pq.enqueue(code);
+                    System.out.println("distance: " + distance + " airline_code: " + airline_code);
+                    System.out.println("edgeFly.getDepartedAirport().getCode(): " + edgeFly.getDepartedAirport().getCode());
+                    if (code.equals(destination_code)) return;
                 }
             }
         }

@@ -30,15 +30,18 @@ public class GraphImplFly implements GraphRoute, GraphBuilderRoute {
         EdgeFly edgeFly = new FlyRouteEdge(departure, destination, distance, airlines_codes);
         allEdges.add(edgeFly);
         helpaddtolist(departure.getCode(), edgeFly);
+        //addEdge departure.getCode(): THL destination.getCode(): HEH
+        //addEdge departure.getCode(): HEH destination.getCode(): MDL
+        //addEdge departure.getCode(): MDL destination.getCode(): MYT
     }
 
     private void helpaddtolist(String code, EdgeFly e) {
         ArrayList<EdgeFly> edgeFlies = array.get(code);
         if (edgeFlies == null) {
             edgeFlies = new ArrayList<>();
-            edgeFlies.add(e);
-            array.put(code, edgeFlies);
         }
+        edgeFlies.add(e);
+        array.put(code, edgeFlies);
     }
 
     @Override
@@ -55,6 +58,10 @@ public class GraphImplFly implements GraphRoute, GraphBuilderRoute {
     public Iterable<EdgeFly> adj(String code) {
         ArrayList<EdgeFly> adjlist = array.get(code);
         if (adjlist == null) return emptylist;
+        System.out.println("called adj in graphimpfly with code: " + code + " adjlist size: " + adjlist.size());
+        for (EdgeFly edgefly : adjlist) {
+            System.out.println("going to " + edgefly.getDestinationAirport().getCode());
+        }
         return adjlist;
     }
 

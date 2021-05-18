@@ -1,6 +1,7 @@
 package Implementation.edges;
 
 import Implementation.dto.Airport;
+import Interfaces.Edge;
 import Interfaces.EdgeFly;
 
 public class FlyRouteEdge implements EdgeFly {
@@ -45,6 +46,8 @@ public class FlyRouteEdge implements EdgeFly {
 
     @Override
     public int compareTo(EdgeFly o) {
-        return 0;
+        if (this.distance < o.getDistance()) return -1;
+        else if (this.distance > o.getDistance()) return +1;
+        else return 0;
     }
 }
