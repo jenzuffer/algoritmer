@@ -28,14 +28,13 @@ public class BFS {
                 String airline_code = edgeFly.airlineCode();
                 Airport destinationAirport = edgeFly.getDestinationAirport();
                 String code = destinationAirport.getCode();
-                System.out.println("code: " + code);
-                //System.out.println("marked.get(code): " + marked.get(code));
                 if (marked.get(code) == null || !marked.get(code)) {
                     marked.put(code, true);
                     pq.enqueue(code);
+                    System.out.println("code: " + code);
                     System.out.println("distance: " + distance + " airline_code: " + airline_code);
                     System.out.println("edgeFly.getDepartedAirport().getCode(): " + edgeFly.getDepartedAirport().getCode());
-                    if (code.equals(destination_code)) return;
+                    //if (code.equals(destination_code)) return;
                 }
             }
         }

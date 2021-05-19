@@ -45,12 +45,22 @@ public class Main {
         String airline = "W9";
 
         GraphRoute graphRoute = new GraphFactoryImplFly().readFromObjects(aircraftList, airlines, airports, routes, airline);
+        System.out.println("BFS:");
         BFS bfs = new BFS(graphRoute, departAirport, destinationAirport);
         System.out.println("next");
         destinationAirport = "PBU";
         departAirport = "AKY";
         bfs = new BFS(graphRoute, departAirport, destinationAirport);
-        //DFS dfs = new DFS(graph1, 0);
+
+
+        System.out.println("DFS:");
+        departAirport = "HEH";
+        destinationAirport = "MYT";
+        DFS dfs = new DFS(graphRoute, departAirport, destinationAirport);
+        System.out.println("\n\n\nnext\n\n\n");
+        destinationAirport = "PBU";
+        departAirport = "AKY";
+        dfs = new DFS(graphRoute, departAirport, destinationAirport);
 
 /*
         EdgeWeightedDigraph factory = new EdgeWeightedDigraph(edgeWeightedGraph);
