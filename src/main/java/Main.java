@@ -14,20 +14,7 @@ public class Main {
 
         /*
         Graph graph1 = new GraphFactoryImpl().readFromFile("src/main/resources/graph2.txt");
-
-
-        var ls3 = new PrimMST(graph1);
-        System.out.println(ls3.edges() + " " + ls3.weight());
-
-        var ls2 = new KruskalMST(graph1);
-        System.out.println(ls2.edges() + " " + ls2.weight());
         */
-
-        // LazyPrimMST lazyPrimMST = new LazyPrimMST(graph1);
-        //KruskalMST kruskalMST = new KruskalMST(graph1);
-        //Dijkstra dijkstra = new Dijkstra(graph1, 0);
-        //System.out.println(dijkstra);
-
 
 
         FileReaderImpl fileReader = new FileReaderImpl();
@@ -62,6 +49,11 @@ public class Main {
         departAirport = "AKY";
         dfs = new DFS(graphRoute, departAirport, destinationAirport);
 
+        System.out.println("diijstrka distance");
+        departAirport = "HEH";
+        destinationAirport = "MYT";
+        Dijkstra dijkstra = new Dijkstra(graphRoute, departAirport, destinationAirport);
+        System.out.println(dijkstra.toString());
 /*
         EdgeWeightedDigraph factory = new EdgeWeightedDigraph(edgeWeightedGraph);
         Dijkstra2 dijkstra2 = new Dijkstra2(factory, 0);

@@ -1,95 +1,93 @@
 package Algoritmer;
 
 
+import Implementation.dto.Airport;
 import Implementation.queue.Queue;
 import Interfaces.Edge;
+import Interfaces.EdgeFly;
 import Interfaces.Graph;
+import Interfaces.GraphRoute;
 
 import java.util.*;
 
 public class Dijkstra {
-    private int[] pathArray;
-    private float[] bestWeight;
-    private boolean[] marked;
-    private Queue pq;
+    //private int[] pathArray;
+    private LinkedHashMap<String, Float> bestWeight;
+    //private float[] bestWeight;
+    private LinkedHashMap<String, String> pathArray;
+    private HashMap<String, Boolean> marked;
+    private PriorityQueue pq;
 
-    public Dijkstra(Graph g, int startNode) {
+    public Dijkstra(GraphRoute g, String departAirport, String targetAirport) {
 
-        pathArray = new int[g.getVertiesCount()];
-        for (int i = 0; i < pathArray.length; i++) {
-            pathArray[i] = -1;
-        }
+        pathArray = new LinkedHashMap(g.getVertiesCount());
 
-        bestWeight = new float[g.getVertiesCount()];
-        for (int i = 0; i < bestWeight.length; i++) {
-            bestWeight[i] = Float.MAX_VALUE;
-        }
-        marked = new boolean[g.getVertiesCount()];
-        for (int i = 0; i < marked.length; i++) {
-            marked[i] = false;
-        }
-        int curNode = startNode;
-        marked[startNode] = true;
-        pathArray[startNode] = -1;
-        bestWeight[curNode] = 0;
-        pq = new Queue();
-        pq.enqueue(startNode);
+        bestWeight = new LinkedHashMap(g.getVertiesCount());
+
+        this.marked = new HashMap<>(g.getVertiesCount());
+        marked.put(departAirport, true);
+        String currentAirport = departAirport;
+
+        pathArray.put(departAirport, departAirport);
+        bestWeight.put(currentAirport, (float) 0);
+        pq = new PriorityQueue();
+        pq.add(departAirport);
 
         while (!pq.isEmpty()) {
-            float currentCost = bestWeight[curNode];
+            pq.remove(currentAirport);
+            Float currentCost = bestWeight.get(currentAirport);
             //if (startNode == curNode) pq.dequeue();
             //System.out.println("curNode: " + curNode);
-            for (Edge e : g.adj(curNode)) {
-                float cost = currentCost + e.getWeight();
-                int toNode = e.to();
-                if (cost < bestWeight[toNode]) {
-                    //System.out.println("cost: " + cost + " toNode: " + toNode);
-                    bestWeight[toNode] = cost;
-                    pathArray[toNode] = curNode;
+            for (EdgeFly edgeFly : g.adj(currentAirport)) {
+                float cost = (float) (currentCost + edgeFly.getDistance());
+                String destinationAirport = edgeFly.getDestinationAirport().getCode();
+                Float aFloat = bestWeight.get(destinationAirport);
+                if (aFloat == null) aFloat = Float.MAX_VALUE;
+                if (cost < aFloat) {
+                    System.out.println("adding destinationAirport: " + destinationAirport + " with cost: " + cost +
+                            " aFloat: " + aFloat);
+                    bestWeight.put(destinationAirport, cost);
+                    pathArray.put(destinationAirport, currentAirport);
                 }
-
-                if (!marked[toNode]) {
-                    pq.enqueue(toNode);
-                    marked[toNode] = true;
+                /*
+                if (!pq.contains(destinationAirport))
+                    pq.add(destinationAirport);
+                */
+                if (marked.get(destinationAirport) == null || !marked.get(destinationAirport)) {
+                    pq.add(destinationAirport);
+                    marked.put(destinationAirport, true);
                 }
             }
 
             //dequeue skal altid retunere lavest score
             //curNode = extractMinScore();
-             curNode = (int) pq.dequeue();
+            currentAirport = (String) pq.poll();
             //if (curNode != dequeue) curNode = dequeue;
         }
-    }
 
-    private int extractMinScore() {
-        int result = 0;
-        float minWeight = Float.MAX_VALUE;
-        for (Object i : pq) {
-            int toNode = (int) i;
-            if (bestWeight[toNode] < minWeight) {
-                result = toNode;
-                minWeight = bestWeight[toNode];
-            }
-        }
-        return result;
-    }
+        //skal ændres eller fjernes?
 
+    }
 
     public String toString() {
         StringBuilder res = new StringBuilder();
         res.append("best weights:\n");
-        for (int i = 0; i < bestWeight.length; i++) {
-            res.append(i);
+        int iterator = 0;
+        for (Map.Entry<String, Float> stringFloatEntry : bestWeight.entrySet()) {
+            res.append(iterator);
+            iterator++;
             res.append(": ");
-            res.append(bestWeight[i]);
+            res.append(stringFloatEntry.getKey() + ": " + stringFloatEntry.getValue());
             res.append("\n");
         }
 
         res.append("path parents:\n");
-        for (int i = 0; i < pathArray.length; i++) {
-            res.append(i);
+        iterator = 0;
+        for (Map.Entry<String, String> stringStringEntry : pathArray.entrySet()) {
+            res.append(iterator);
+            iterator++;
             res.append(": ");
-            res.append(pathArray[i]);
+            res.append(stringStringEntry.getKey());
             res.append("\n");
         }
 
