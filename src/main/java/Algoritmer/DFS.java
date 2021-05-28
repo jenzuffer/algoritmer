@@ -2,9 +2,9 @@ package Algoritmer;
 
 import Implementation.dto.Airport;
 import Implementation.queue.Queue;
-import Interfaces.Edge;
+
 import Interfaces.EdgeFly;
-import Interfaces.Graph;
+
 import Interfaces.GraphRoute;
 
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class DFS {
         pq.enqueue(departure_code);
         while (!pq.isEmpty()) {
             String dequeue = (String) pq.dequeue();
-            System.out.println("\n\nDequeue: " + dequeue);
+            //System.out.println("\n\nDequeue: " + dequeue);
             fillDFS(graphRoute, dequeue, destination_code);
         }
     }

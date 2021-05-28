@@ -2,9 +2,7 @@ package Algoritmer;
 
 import Implementation.dto.Airport;
 import Implementation.queue.Queue;
-import Interfaces.Edge;
 import Interfaces.EdgeFly;
-import Interfaces.Graph;
 import Interfaces.GraphRoute;
 
 import java.util.HashMap;

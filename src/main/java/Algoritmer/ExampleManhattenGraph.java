@@ -2,7 +2,7 @@ package Algoritmer;
 
 import Interfaces.ManhattanGraph;
 
-import java.util.Arrays;
+
 
 public class ExampleManhattenGraph implements ManhattanGraph {
     private int[][] map;
