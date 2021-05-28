@@ -18,6 +18,7 @@ public class Dijkstra {
     private HashMap<String, Boolean> marked;
     private PriorityQueue pq;
     private boolean reachedTargetAirpor;
+    private LinkedHashMap<String, Float> shortestPathMap;
 
     public boolean isReachedTargetAirpor() {
         return reachedTargetAirpor;
@@ -26,7 +27,7 @@ public class Dijkstra {
     public Dijkstra(GraphRoute g, String departAirport, String targetAirport) {
 
         pathArray = new LinkedHashMap(g.getVertiesCount());
-
+        shortestPathMap = new LinkedHashMap<>(g.getVertiesCount());
         bestWeight = new LinkedHashMap(g.getVertiesCount());
         reachedTargetAirpor = false;
         this.marked = new HashMap<>(g.getVertiesCount());
@@ -39,16 +40,16 @@ public class Dijkstra {
         pq.add(departAirport);
 
         while (!pq.isEmpty()) {
-            pq.remove(currentAirport);
+            //pq.remove(currentAirport);
+            currentAirport = (String) pq.poll();
             float currentCost = bestWeight.get(currentAirport);
-            //if (startNode == curNode) pq.dequeue();
-            //System.out.println("curNode: " + curNode);
+            //System.out.println("currentAirport: " + currentAirport);
             for (EdgeFly edgeFly : g.adj(currentAirport)) {
                 float cost = (float) (currentCost + edgeFly.getDistance());
                 String destinationAirport = edgeFly.getDestinationAirport().getCode();
                 float aFloat = bestWeight.getOrDefault(destinationAirport, Float.MAX_VALUE);
                 if (cost < aFloat) {
-                    /*System.out.println("adding destinationAirport: " + destinationAirport + " with cost: " + cost +
+                    /*System.out.println(" destinationAirport: " + destinationAirport + " with cost: " + cost +
                             " aFloat: " + aFloat);*/
                     bestWeight.put(destinationAirport, cost);
                     pathArray.put(destinationAirport, currentAirport);
@@ -58,24 +59,28 @@ public class Dijkstra {
                     pq.add(destinationAirport);
                 */
                 if (marked.get(destinationAirport) == null || !marked.get(destinationAirport)) {
+                    //System.out.println("marked: " + destinationAirport);
                     pq.add(destinationAirport);
                     marked.put(destinationAirport, true);
                 }
             }
 
-            //dequeue skal altid retunere lavest score
-            //curNode = extractMinScore();
-            currentAirport = (String) pq.poll();
+
             if (targetAirport.equals(currentAirport)) {
                 System.out.println("Reached target airport \n \n");
+                shortestPathMap.put(currentAirport, bestWeight.get(currentAirport));
+                String previousAirport = pathArray.get(currentAirport);
+                while (!previousAirport.equals(departAirport)){
+                    shortestPathMap.put(previousAirport, bestWeight.get(previousAirport));
+                    previousAirport = pathArray.get(previousAirport);
+                }
+                shortestPathMap.put(departAirport, bestWeight.get(departAirport));
                 reachedTargetAirpor = true;
             }
-            //if (curNode != dequeue) curNode = dequeue;
         }
 
-        //skal ændres eller fjernes?
-
     }
+
 
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -103,23 +108,10 @@ public class Dijkstra {
     }
 
     public void displayShortestRoute(String departAirport, String destinationAirport) {
-        int iterator = 0;
-        List<Map.Entry<String, Float>> entries =
-                new ArrayList<Map.Entry<String, Float>>(bestWeight.entrySet());
-        Collections.sort(entries, new Comparator<Map.Entry<String, Float>>() {
-            public int compare(Map.Entry<String, Float> a, Map.Entry<String, Float> b) {
-                return a.getValue().compareTo(b.getValue());
-            }
-        });
-        LinkedHashMap<String, Float> sortedMap = new LinkedHashMap<String, Float>();
-        for (Map.Entry<String, Float> entry : entries) {
-            sortedMap.put(entry.getKey(), entry.getValue());
-        }
-
-        for (Map.Entry<String, Float> stringFloatEntry : sortedMap.entrySet()) {
+        int iterator = shortestPathMap.size();
+        for (Map.Entry<String, Float> stringFloatEntry : shortestPathMap.entrySet()) {
             System.out.println(iterator + ": " + stringFloatEntry.getKey() + ": " + stringFloatEntry.getValue());
-            iterator++;
-            if (stringFloatEntry.getKey().equals(destinationAirport)) break;
+            iterator--;
         }
     }
 }

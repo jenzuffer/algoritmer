@@ -25,7 +25,7 @@ public class GraphFactoryImplFly implements GraphFactoryFly {
         for (Route route : routes) {
             String airline_code = route.getAirline_code();
             //using only a single airline company from start to finish
-            if (!airline_code.equals(airline)) continue;
+            //if (!airline_code.equals(airline)) continue;
             String source_code = route.getSource_code();
             String destination_code = route.getDestination_code();
             Airport airport_source = airportHashMap.get(source_code);

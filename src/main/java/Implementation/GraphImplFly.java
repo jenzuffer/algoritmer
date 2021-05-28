@@ -59,9 +59,9 @@ public class GraphImplFly implements GraphRoute, GraphBuilderRoute {
         ArrayList<EdgeFly> adjlist = array.get(code);
         if (adjlist == null) return emptylist;
         //System.out.println("called adj in graphimpfly with code: " + code + " adjlist size: " + adjlist.size());
-        /*for (EdgeFly edgefly : adjlist) {
-            System.out.println("going to " + edgefly.getDestinationAirport().getCode());
-        }*/
+        for (EdgeFly edgefly : adjlist) {
+            //System.out.println("going to " + edgefly.getDestinationAirport().getCode());
+        }
         return adjlist;
     }
 

@@ -27,6 +27,8 @@ public class Main {
         path = "src\\main\\resources\\routes.csv";
         List<Route> routes = fileReader.getRoutes(path);
 
+
+        //GraphFactoryImplFly.java (28l) //if (!airline_code.equals(airline)) continue; decides if one airline or many
         String departAirport = "HEH";
         String destinationAirport = "MYT";
         String airline = "W9";
@@ -51,8 +53,8 @@ public class Main {
         dfs = new DFS(graphRoute, departAirport, destinationAirport);
         */
         //System.out.println("diijstrka distance");
-        departAirport = "HEH";
-        destinationAirport = "AKY";
+        departAirport = "URC";
+        destinationAirport = "SCO";
         Dijkstra dijkstra = new Dijkstra(graphRoute, departAirport, destinationAirport);
         if (dijkstra.isReachedTargetAirpor()) {
             //System.out.println(dijkstra.toString());
