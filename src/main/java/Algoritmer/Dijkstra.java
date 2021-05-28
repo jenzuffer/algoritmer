@@ -9,6 +9,8 @@ import Interfaces.Graph;
 import Interfaces.GraphRoute;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Dijkstra {
     //private int[] pathArray;
@@ -17,13 +19,18 @@ public class Dijkstra {
     private LinkedHashMap<String, String> pathArray;
     private HashMap<String, Boolean> marked;
     private PriorityQueue pq;
+    private boolean reachedTargetAirpor;
+
+    public boolean isReachedTargetAirpor() {
+        return reachedTargetAirpor;
+    }
 
     public Dijkstra(GraphRoute g, String departAirport, String targetAirport) {
 
         pathArray = new LinkedHashMap(g.getVertiesCount());
 
         bestWeight = new LinkedHashMap(g.getVertiesCount());
-
+        reachedTargetAirpor = false;
         this.marked = new HashMap<>(g.getVertiesCount());
         marked.put(departAirport, true);
         String currentAirport = departAirport;
@@ -35,17 +42,16 @@ public class Dijkstra {
 
         while (!pq.isEmpty()) {
             pq.remove(currentAirport);
-            Float currentCost = bestWeight.get(currentAirport);
+            float currentCost = bestWeight.get(currentAirport);
             //if (startNode == curNode) pq.dequeue();
             //System.out.println("curNode: " + curNode);
             for (EdgeFly edgeFly : g.adj(currentAirport)) {
                 float cost = (float) (currentCost + edgeFly.getDistance());
                 String destinationAirport = edgeFly.getDestinationAirport().getCode();
-                Float aFloat = bestWeight.get(destinationAirport);
-                if (aFloat == null) aFloat = Float.MAX_VALUE;
+                float aFloat = bestWeight.getOrDefault(destinationAirport, Float.MAX_VALUE);
                 if (cost < aFloat) {
-                    System.out.println("adding destinationAirport: " + destinationAirport + " with cost: " + cost +
-                            " aFloat: " + aFloat);
+                    /*System.out.println("adding destinationAirport: " + destinationAirport + " with cost: " + cost +
+                            " aFloat: " + aFloat);*/
                     bestWeight.put(destinationAirport, cost);
                     pathArray.put(destinationAirport, currentAirport);
                 }
@@ -62,6 +68,10 @@ public class Dijkstra {
             //dequeue skal altid retunere lavest score
             //curNode = extractMinScore();
             currentAirport = (String) pq.poll();
+            if (targetAirport.equals(currentAirport)) {
+                System.out.println("Reached target airport \n \n");
+                reachedTargetAirpor = true;
+            }
             //if (curNode != dequeue) curNode = dequeue;
         }
 
@@ -92,5 +102,26 @@ public class Dijkstra {
         }
 
         return res.toString();
+    }
+
+    public void displayShortestRoute(String departAirport, String destinationAirport) {
+        int iterator = 0;
+        List<Map.Entry<String, Float>> entries =
+                new ArrayList<Map.Entry<String, Float>>(bestWeight.entrySet());
+        Collections.sort(entries, new Comparator<Map.Entry<String, Float>>() {
+            public int compare(Map.Entry<String, Float> a, Map.Entry<String, Float> b) {
+                return a.getValue().compareTo(b.getValue());
+            }
+        });
+        LinkedHashMap<String, Float> sortedMap = new LinkedHashMap<String, Float>();
+        for (Map.Entry<String, Float> entry : entries) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
+        for (Map.Entry<String, Float> stringFloatEntry : sortedMap.entrySet()) {
+            System.out.println(iterator + ": " + stringFloatEntry.getKey() + ": " + stringFloatEntry.getValue());
+            iterator++;
+            if (stringFloatEntry.getKey().equals(destinationAirport)) break;
+        }
     }
 }

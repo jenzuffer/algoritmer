@@ -32,6 +32,7 @@ public class Main {
         String airline = "W9";
 
         GraphRoute graphRoute = new GraphFactoryImplFly().readFromObjects(aircraftList, airlines, airports, routes, airline);
+        /*
         System.out.println("BFS:");
         BFS bfs = new BFS(graphRoute, departAirport, destinationAirport);
         System.out.println("next");
@@ -48,12 +49,15 @@ public class Main {
         destinationAirport = "PBU";
         departAirport = "AKY";
         dfs = new DFS(graphRoute, departAirport, destinationAirport);
-
-        System.out.println("diijstrka distance");
+        */
+        //System.out.println("diijstrka distance");
         departAirport = "HEH";
-        destinationAirport = "MYT";
+        destinationAirport = "AKY";
         Dijkstra dijkstra = new Dijkstra(graphRoute, departAirport, destinationAirport);
-        System.out.println(dijkstra.toString());
+        if (dijkstra.isReachedTargetAirpor()) {
+            //System.out.println(dijkstra.toString());
+            dijkstra.displayShortestRoute(departAirport, destinationAirport);
+        }
 /*
         EdgeWeightedDigraph factory = new EdgeWeightedDigraph(edgeWeightedGraph);
         Dijkstra2 dijkstra2 = new Dijkstra2(factory, 0);
