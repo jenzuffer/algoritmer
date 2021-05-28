@@ -5,6 +5,8 @@ public class Airport {
     private String name;
     private String city;
     private String country;
+    private String lattitude;
+    private String longtitude;
 
     public String getCode() {
         return code;
@@ -39,11 +41,8 @@ public class Airport {
         this.longtitude = longtitude;
     }
 
-    private String lattitude;
-    private String longtitude;
-
     @Override
-    public String toString(){
+    public String toString() {
         return "code: " + code + " name: " + name + " city: " + city + " country: " + country + "lattitude: " + lattitude;
     }
 }

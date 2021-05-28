@@ -3,6 +3,7 @@ package Implementation.dto;
 public class Airline {
     private String code;
     private String name;
+    private String country;
 
     public String getCode() {
         return code;
@@ -16,7 +17,6 @@ public class Airline {
         return country;
     }
 
-    private String country;
 
     public Airline(String code, String name, String country) {
         this.code = code;
@@ -25,7 +25,7 @@ public class Airline {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "code: " + code + " name: " + name + " country: " + country;
     }
 }
