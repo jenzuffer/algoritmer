@@ -8,13 +8,15 @@ public class FlyRouteEdge implements EdgeFly {
     private Airport source;
     private Airport destination;
     private double distance;
+    private float time;
     private String airlines_codes;
 
-    public FlyRouteEdge(Airport source, Airport destination, double distance, String airlines_codes) {
+    public FlyRouteEdge(Airport source, Airport destination, double distance, String airlines_codes, float time) {
         this.source = source;
         this.destination = destination;
         this.distance = distance;
         this.airlines_codes = airlines_codes;
+        this.time = time;
     }
 
     public FlyRouteEdge(EdgeFly edgeFly) {
@@ -22,6 +24,7 @@ public class FlyRouteEdge implements EdgeFly {
         this.destination = edgeFly.getDestinationAirport();
         this.distance = edgeFly.getDistance();
         this.airlines_codes = edgeFly.airlineCode();
+        this.time = edgeFly.getTime();
     }
 
     @Override
@@ -32,6 +35,11 @@ public class FlyRouteEdge implements EdgeFly {
     @Override
     public double getDistance() {
         return distance;
+    }
+
+    @Override
+    public float getTime() {
+        return time;
     }
 
     @Override

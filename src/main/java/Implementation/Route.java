@@ -22,11 +22,11 @@ public class Route {
         return distance;
     }
 
-    public String getTime() {
+    public float getTime() {
         return time;
     }
 
-    public Route(String airline_code, String source_code, String destination_code, double distance, String time) {
+    public Route(String airline_code, String source_code, String destination_code, double distance, float time) {
         this.airline_code = airline_code;
         this.source_code = source_code;
         this.destination_code = destination_code;
@@ -34,7 +34,7 @@ public class Route {
         this.time = time;
     }
 
-    private String time;
+    private float time;
 
     @Override
     public String toString() {

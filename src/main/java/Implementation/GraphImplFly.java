@@ -26,8 +26,8 @@ public class GraphImplFly implements GraphRoute, GraphBuilderRoute {
     }
 
     @Override
-    public void addEdge(Airport departure, Airport destination, double distance, String airlines_codes) {
-        EdgeFly edgeFly = new FlyRouteEdge(departure, destination, distance, airlines_codes);
+    public void addEdge(Airport departure, Airport destination, double distance, String airlines_codes, float time) {
+        EdgeFly edgeFly = new FlyRouteEdge(departure, destination, distance, airlines_codes, time);
         allEdges.add(edgeFly);
         helpaddtolist(departure.getCode(), edgeFly);
         //addEdge departure.getCode(): THL destination.getCode(): HEH

@@ -31,7 +31,8 @@ public class GraphFactoryImplFly implements GraphFactoryFly {
             Airport airport_source = airportHashMap.get(source_code);
             Airport airport_destination = airportHashMap.get(destination_code);
             double distance = route.getDistance();
-            builder.addEdge(airport_source, airport_destination, distance, airline_code);
+            float time = route.getTime();
+            builder.addEdge(airport_source, airport_destination, distance, airline_code, time);
         }
 
         return builder.build();
