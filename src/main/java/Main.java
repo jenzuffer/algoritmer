@@ -51,6 +51,7 @@ public class Main {
         //dfs = new DFS(graphRoute, departAirport, destinationAirport);
 
         //System.out.println("diijstrka distance");
+        /*
         departAirport = "URC";
         destinationAirport = "SCO";
         Dijkstra dijkstra = new Dijkstra(graphRoute, departAirport, destinationAirport);
@@ -58,6 +59,13 @@ public class Main {
             //System.out.println(dijkstra.toString());
             dijkstra.displayShortestRoute(departAirport, destinationAirport);
         }
+
+         */
+        var maze = new MazeMapFromFile("src/main/resources/simpleMaze.txt");
+        AStarProblem problem = new ManhattanProblem(maze);
+        var ser  =new AStarAlgorithm(problem);
+        //System.out.println(ser.toString());
+        System.out.println(ser);
 /*
         EdgeWeightedDigraph factory = new EdgeWeightedDigraph(edgeWeightedGraph);
         Dijkstra2 dijkstra2 = new Dijkstra2(factory, 0);
