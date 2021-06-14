@@ -13,7 +13,7 @@ public class Dijkstra {
     //private int[] pathArray;
     private LinkedHashMap<String, Float> bestWeight;
     private LinkedHashMap<String, Float> bestWeightTime;
-    //private float[] bestWeight;
+    //get(), put(), contains() = O(1)
     private LinkedHashMap<String, String> pathArray;
     private LinkedHashMap<String, String> pathArrayTime;
     private HashMap<String, Boolean> marked;
@@ -21,13 +21,14 @@ public class Dijkstra {
     private boolean reachedTargetAirpor;
     private LinkedHashMap<String, Float> shortestPathMap;
     private LinkedHashMap<String, Float> shortestPathMapTime;
+    private String depature;
 
     public boolean isReachedTargetAirpor() {
         return reachedTargetAirpor;
     }
 
     public Dijkstra(GraphRoute g, String departAirport, String targetAirport) {
-
+        depature = departAirport;
         pathArray = new LinkedHashMap(g.getVertiesCount());
         pathArrayTime = new LinkedHashMap<>(g.getVertiesCount());
         shortestPathMap = new LinkedHashMap<>(g.getVertiesCount());
@@ -72,20 +73,21 @@ public class Dijkstra {
                     marked.put(destinationAirport, true);
                 }
             }
-
             if (targetAirport.equals(currentAirport)) {
-                System.out.println("Reached target airport \n \n");
+                System.out.println("Reached target airport \n");
+                //placer ind i linked hashmap (key = endAirport, value = bedste float værdi fra bestWeight til reaching airport)
                 shortestPathMap.put(currentAirport, bestWeight.get(currentAirport));
                 shortestPathMapTime.put(currentAirport, bestWeightTime.get(currentAirport));
                 String previousAirport = pathArray.get(currentAirport);
                 String previousAirportTime = pathArrayTime.get(currentAirport);
+                //bestWeight && bestWeightTime opdateres hver gang hvis der findes en bedre værdi på lufthavnene
                 while (!previousAirport.equals(departAirport)) {
                     shortestPathMap.put(previousAirport, bestWeight.get(previousAirport));
                     previousAirport = pathArray.get(previousAirport);
                 }
                 while (!previousAirportTime.equals(departAirport)) {
                     shortestPathMapTime.put(previousAirportTime, bestWeightTime.get(previousAirportTime));
-                    previousAirportTime = pathArrayTime.get(departAirport);
+                    previousAirportTime = pathArrayTime.get(previousAirportTime); //departAirport
                 }
                 shortestPathMap.put(departAirport, bestWeight.get(departAirport));
                 shortestPathMapTime.put(departAirport, bestWeightTime.get(departAirport));
@@ -104,10 +106,17 @@ public class Dijkstra {
             res.append(iterator);
             iterator++;
             res.append(": ");
-            res.append(stringFloatEntry.getKey() + ": " + stringFloatEntry.getValue());
+            res.append(" route: " + stringFloatEntry.getKey());
+            String s = stringFloatEntry.getKey();
+            while (!s.equals(depature)) {
+                s = pathArray.get(s);
+                res.append(" <- " + s);
+            }
+            res.append(" distance: " + stringFloatEntry.getValue());
             res.append("\n");
         }
 
+        /*
         res.append("path parents:\n");
         iterator = 0;
         for (Map.Entry<String, String> stringStringEntry : pathArray.entrySet()) {
@@ -117,12 +126,13 @@ public class Dijkstra {
             res.append(stringStringEntry.getKey());
             res.append("\n");
         }
-
+        */
         return res.toString();
     }
 
     public void displayShortestRoute(String departAirport, String destinationAirport) {
         int iterator = shortestPathMap.size();
+        System.out.println("shortest route by Distance");
         for (Map.Entry<String, Float> stringFloatEntry : shortestPathMap.entrySet()) {
             System.out.println(iterator + ": " + stringFloatEntry.getKey() + ": " + stringFloatEntry.getValue());
             iterator--;

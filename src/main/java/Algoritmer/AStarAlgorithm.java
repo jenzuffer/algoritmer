@@ -23,7 +23,6 @@ public class AStarAlgorithm {
     int[] fromNodes;
     float[] travelcosts;
 
-
     public AStarAlgorithm(AStarProblem props) {
         this.graph = props.getGraph();
         this.startNode = props.getStartNode();
@@ -63,7 +62,6 @@ public class AStarAlgorithm {
                 bestWeight[toNode] = travelcosts[toNode] + bestPossibleCostAfterToNode;
                 pQueue.add(Pair.of(toNode, bestWeight[toNode]));
             }
-
         }
 
     }

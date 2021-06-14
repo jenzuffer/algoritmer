@@ -12,10 +12,6 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        /*
-        Graph graph1 = new GraphFactoryImpl().readFromFile("src/main/resources/graph2.txt");
-        */
-
 
         FileReaderImpl fileReader = new FileReaderImpl();
         String path = "src\\main\\resources\\aircrafts.csv";
@@ -29,59 +25,43 @@ public class Main {
 
 
         //GraphFactoryImplFly.java (28l) //if (!airline_code.equals(airline)) continue; decides if one airline or many
-        String departAirport = "HEH";
-        String destinationAirport = "MYT";
         String airline = "W9";
 
         GraphRoute graphRoute = new GraphFactoryImplFly().readFromObjects(aircraftList, airlines, airports, routes, airline);
 
-        //System.out.println("BFS:");
-        //BFS bfs = new BFS(graphRoute, departAirport, destinationAirport);
-        /*
-        destinationAirport = "PBU";
-        departAirport = "AKY";
-        bfs = new BFS(graphRoute, departAirport, destinationAirport);
-*/
 
-        //System.out.println("DFS:");
-        //DFS dfs = new DFS(graphRoute, departAirport, destinationAirport);
+        String destinationAirport = "PBU";
+        String departAirport = "AKY";
 
-        destinationAirport = "PBU";
-        departAirport = "AKY";
-        //dfs = new DFS(graphRoute, departAirport, destinationAirport);
-
-        //System.out.println("diijstrka distance");
-        /*
-        departAirport = "URC";
-        destinationAirport = "SCO";
+        System.out.println("from " + departAirport + " to " + destinationAirport);
         Dijkstra dijkstra = new Dijkstra(graphRoute, departAirport, destinationAirport);
         if (dijkstra.isReachedTargetAirpor()) {
-            //System.out.println(dijkstra.toString());
             dijkstra.displayShortestRoute(departAirport, destinationAirport);
+        } else {
+            System.out.println("no connecting flights");
         }
+        System.out.println(dijkstra.toString());
 
-         */
-        var maze = new MazeMapFromFile("src/main/resources/simpleMaze.txt");
+        departAirport = "SCO";
+        destinationAirport = "YAV";
+        System.out.println("from " + departAirport + " to " + destinationAirport);
+        dijkstra = new Dijkstra(graphRoute, departAirport, destinationAirport);
+        if (dijkstra.isReachedTargetAirpor()) {
+            dijkstra.displayShortestRoute(departAirport, destinationAirport);
+        } else {
+            System.out.println("no connecting flights");
+        }
+        System.out.println(dijkstra.toString());
+        /*
+        System.out.println("astar: ");
+        //ManhattanGraph manhattanGraph = new MazeMapFromFile();
+        //var maze = new MazeMapFromFile("src/main/resources/simpleMaze.txt");
+        var maze = new MazeMapFromFile("src/main/resources/problemB.txt");
         AStarProblem problem = new ManhattanProblem(maze);
-        var ser  =new AStarAlgorithm(problem);
+        var ser = new AStarAlgorithm(problem);
         //System.out.println(ser.toString());
         System.out.println(ser);
-/*
-        EdgeWeightedDigraph factory = new EdgeWeightedDigraph(edgeWeightedGraph);
-        Dijkstra2 dijkstra2 = new Dijkstra2(factory, 0);
+*/
 
-        System.out.println(dijkstra2);
-
-
-        Heuristicclass heuristicclass = new Heuristicclass();
-        Graph graph = new GraphImplementation();
-
-        AstarProblem aproblem = new Aproblem(graph, 0, 5, heuristicclass);
-
-        AStarAlgorithm aStarAlgorithm = new AStarAlgorithm(aproblem);
-
-    }
-
- */
     }
 }
