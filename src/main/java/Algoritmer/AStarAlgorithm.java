@@ -7,6 +7,7 @@ import Interfaces.Heuristic;
 import org.apache.commons.lang3.tuple.Pair;
 
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -43,38 +44,52 @@ public class AStarAlgorithm {
 
         marked[startNode] = true;
 
-
-        float bestWeigth = this.heuristic.h(this.startNode, this.targetNode);
-        bestWeight[startNode] = bestWeigth;
+        bestWeight[startNode] = this.heuristic.h(this.startNode, this.targetNode);
         pQueue.add(Pair.of(startNode, bestWeight[startNode]));
         while (!pQueue.isEmpty()) {
             var currentNode = (int) pQueue.poll().getKey();
             for (Edge edge : graph.adj(currentNode)) {
                 int toNode = edge.to();
+                if (toNode == targetNode) {
+                    fromNodes[toNode] = currentNode;
+                    fromNodes[toNode + 1] = toNode;
+                    System.out.println("fromNodes[toNode]: " + fromNodes[toNode]);
+                    System.out.println("fromNodes[toNode]: " + fromNodes[toNode + 1]);
+                    System.out.println("found targetNode " + targetNode);
+                    return;
+                }
                 if (marked[toNode])
                     continue;
-                if (toNode == targetNode)
-                    return;
                 marked[toNode] = true;
                 fromNodes[toNode] = currentNode;
+                System.out.println("fromNodes[toNode]: " + fromNodes[toNode]);
                 var bestPossibleCostAfterToNode = this.heuristic.h(toNode, this.targetNode);
-                travelcosts[toNode] = travelcosts[currentNode] + edge.getWeight();
-                bestWeight[toNode] = travelcosts[toNode] + bestPossibleCostAfterToNode;
-                pQueue.add(Pair.of(toNode, bestWeight[toNode]));
+                if (travelcosts[toNode] < travelcosts[currentNode] + edge.getWeight()) {
+                    travelcosts[toNode] = travelcosts[currentNode] + edge.getWeight();
+                    bestWeight[toNode] = travelcosts[toNode] + bestPossibleCostAfterToNode;
+                    pQueue.add(Pair.of(toNode, bestWeight[toNode]));
+                }
             }
+
         }
 
     }
 
     public String toString() {
         StringBuilder res = new StringBuilder();
+
         for (int node : fromNodes) {
             if (node != -1) {
-                System.out.println(" node: " + node);
+                //System.out.println(" node: " + node);
             }
         }
-
-
+        /*
+        for (int i = 0; i < bestWeight.length; i++){
+            if (fromNodes[i] == -1) continue;
+            res.append(i + ": ");
+            res.append(fromNodes[i] + " \n");
+        }
+*/
         return res.toString();
     }
 

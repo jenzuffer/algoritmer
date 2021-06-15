@@ -89,12 +89,13 @@ public class Dijkstra {
                     shortestPathMapTime.put(previousAirportTime, bestWeightTime.get(previousAirportTime));
                     previousAirportTime = pathArrayTime.get(previousAirportTime); //departAirport
                 }
+
+
                 shortestPathMap.put(departAirport, bestWeight.get(departAirport));
                 shortestPathMapTime.put(departAirport, bestWeightTime.get(departAirport));
                 reachedTargetAirpor = true;
             }
         }
-
     }
 
 
@@ -116,17 +117,6 @@ public class Dijkstra {
             res.append("\n");
         }
 
-        /*
-        res.append("path parents:\n");
-        iterator = 0;
-        for (Map.Entry<String, String> stringStringEntry : pathArray.entrySet()) {
-            res.append(iterator);
-            iterator++;
-            res.append(": ");
-            res.append(stringStringEntry.getKey());
-            res.append("\n");
-        }
-        */
         return res.toString();
     }
 

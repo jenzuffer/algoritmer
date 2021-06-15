@@ -35,6 +35,7 @@ public class DFS {
             if (marked.get(code) == null || !marked.get(code)) {
                 marked.put(code, true);
                 pq.enqueue(code);
+                System.out.println("DFS from " + dequeue + " to " + code + " distance " + distance);
                 //System.out.println("code: " + code);
                 //pq.dequeue();
                 //System.out.println("distance: " + distance + " airline_code: " + airline_code);
