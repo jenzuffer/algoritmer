@@ -3,6 +3,7 @@ package Algoritmer;
 import Implementation.dto.Airport;
 import Implementation.queue.Queue;
 
+import Implementation.queue.Stack;
 import Interfaces.EdgeFly;
 
 import Interfaces.GraphRoute;
@@ -12,15 +13,17 @@ import java.util.HashMap;
 public class DFS {
 
     private HashMap<String, Boolean> marked;
-    private Queue pq;
+    private Stack pq;
+    //private Queue pq;
 
     public DFS(GraphRoute graphRoute, String departure_code, String destination_code) {
         this.marked = new HashMap<>(graphRoute.getVertiesCount());
         marked.put(departure_code, true);
-        pq = new Queue();
-        pq.enqueue(departure_code);
-        while (!pq.isEmpty()) {
-            String dequeue = (String) pq.dequeue();
+        pq = new Stack();
+        pq.push(departure_code);
+        //pq.enqueue(departure_code);
+        while (!pq.IsEmpty()) {
+            String dequeue = (String) pq.pop();
             //System.out.println("\n\nDequeue: " + dequeue);
             fillDFS(graphRoute, dequeue, destination_code);
         }
@@ -34,7 +37,7 @@ public class DFS {
             String code = destinationAirport.getCode();
             if (marked.get(code) == null || !marked.get(code)) {
                 marked.put(code, true);
-                pq.enqueue(code);
+                pq.push(code);
                 System.out.println("DFS from " + dequeue + " to " + code + " distance " + distance);
                 //System.out.println("code: " + code);
                 //pq.dequeue();

@@ -57,7 +57,7 @@ public class Main {
         System.out.println("astar: ");
         //ManhattanGraph manhattanGraph = new MazeMapFromFile();
         var maze = new MazeMapFromFile("src/main/resources/simpleMaze.txt");
-        MazeMapFromFile mazeMapFromFile = new MazeMapFromFile("src/main/resources/problemB.txt");
+        //MazeMapFromFile mazeMapFromFile = new MazeMapFromFile("src/main/resources/problemB.txt");
         AStarProblem problem = new ManhattanProblem(maze);
         var ser = new AStarAlgorithm(problem);
         //System.out.println(ser.toString());
@@ -65,8 +65,7 @@ public class Main {
 
         System.out.println("DFS from " + departAirport + " to " + destinationAirport);
         new DFS(graphRoute, departAirport, destinationAirport);
-        System.out.println("\n\n\n\nBFS from " + departAirport + " to " + destinationAirport);
+        System.out.println("\n\n\n\n\n\n\n\nBFS from " + departAirport + " to " + destinationAirport);
         new BFS(graphRoute, departAirport, destinationAirport);
-
     }
 }

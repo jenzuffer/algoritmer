@@ -46,9 +46,9 @@ public class Dijkstra {
         bestWeightTime.put(currentAirport, 0.0f);
         pq = new PriorityQueue();
         pq.add(departAirport);
-
+        //
         while (!pq.isEmpty()) {
-            //pq.remove(currentAirport);
+            //pq.remove(currentAirport);O(ElogV)
             currentAirport = (String) pq.poll();
             float currentCost = bestWeight.get(currentAirport);
             Float currenotCostTime = bestWeightTime.get(currentAirport);
